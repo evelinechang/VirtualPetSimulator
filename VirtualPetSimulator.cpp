@@ -187,7 +187,7 @@ void play(int& hunger, int& happiness, int& cleanliness, int& age, string petNam
     int playChoice;
 
     // arrays for play options 
-    string playNames[2] = {"Freezbee", "Go to the park"};
+    string playNames[2] = {"Frisbee", "Go to the park"};
     int playBonus[2] = {3, 4};
 
     cout << "What do you want to do with " << petName << "?\n";
@@ -200,7 +200,7 @@ void play(int& hunger, int& happiness, int& cleanliness, int& age, string petNam
     {
         cout << "You play " << playNames[0] << " with " << petName << ".\n";
         happiness = happiness + playBonus[0];
-        timePass(hunger, happiness, cleanliness, age); // freezbee
+        timePass(hunger, happiness, cleanliness, age); // frisbee
     }
     else if (playChoice == 2)
     {       
