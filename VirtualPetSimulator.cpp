@@ -26,7 +26,6 @@ const int MAX_AGE = 40;
 const int INITIAL_MONEY = 5000;
 const int DOCTOR_COST = 500;
 
-// Void Function
 void feed(int& hunger, int& happiness, int& cleanliness, int& age, string petName);
 void play(int& hunger, int& happiness, int& cleanliness, int& age, string petName); 
 void talk(int& hunger, int& happiness, int& cleanliness, int& age, string petName); 
@@ -41,16 +40,12 @@ void visitDoctor(int& hunger, int& happiness, int& cleanliness, int& age, int& m
 
 int main()
 { 
-    // https://www.youtube.com/watch?v=-NA_B_vJP14&t=105s
-    // give different random value. 
     srand(time(0)); 
 
     char again;
     do
     {
         int age = INITIAL_PET_AGE;
-        // https://www.w3schools.com/cpp/cpp_howto_random_number.asp
-        
         int happiness = rand() % 20 + 7; 
         int hunger = rand() % 20 + 7; 
         int cleanliness = rand() % 20 + 7; 
