@@ -1,5 +1,5 @@
 /**
-* @file     echang_iteration3.cpp
+* @file     VirtualPetSimulator.cpp
 * @author   Eveline Chang
 * @brief    Term Project 
 * @version  3.0
@@ -38,8 +38,99 @@ void checkMaxStatus(int& hunger, int& happiness, int& cleanliness);
 void petSleep(int& hunger, int& happiness, int& cleanliness, int& age, string petName);
 void visitDoctor(int& hunger, int& happiness, int& cleanliness, int& age, int& money, string petName);
 
-// Function definitions
 
+int main()
+{ 
+    // https://www.youtube.com/watch?v=-NA_B_vJP14&t=105s
+    // give different random value. 
+    srand(time(0)); 
+
+    char again;
+    do
+    {
+        int age = INITIAL_PET_AGE;
+        // https://www.w3schools.com/cpp/cpp_howto_random_number.asp
+        
+        int happiness = rand() % 20 + 7; 
+        int hunger = rand() % 20 + 7; 
+        int cleanliness = rand() % 20 + 7; 
+        int money = INITIAL_MONEY;
+
+
+        string petName;
+        int userChoice;
+        bool gameRunning = true;
+        
+        cout << "Welcome to Virtual Pet 1.0. \n";
+        cout << "Please enter the name of your pet: \n";
+        cin >> petName;
+        
+        cout << "======= Game Start =======\n";
+        do
+        {
+            cout << petName << " is " << age << " years old.\n";
+            cout << "Money: $" << money << endl;
+            cout << "Here is what you can do with " << petName << ".\n";
+            cout << "1. Feed your pet.\n";
+            cout << "2. Play with your pet.\n";
+            cout << "3. Talk to your pet.\n";
+            cout << "4. Clean your pet.\n"; 
+            cout << "5. Let your pet sleep.\n";
+            cout << "6. Take your pet to the doctor. ($500)\n";
+            cout << "7. Quit the game.\n"; 
+            cin >> userChoice;
+
+            if (userChoice == 1)
+            {
+                feed(hunger, happiness, cleanliness, age, petName); 
+            }
+            else if (userChoice == 2)
+            {
+                play(hunger, happiness, cleanliness, age, petName); 
+            }
+            else if (userChoice == 3)
+            {
+                talk(hunger, happiness, cleanliness, age, petName); 
+            }
+            else if (userChoice == 4)
+            {
+                clean(hunger, happiness, cleanliness, age, petName); 
+            }
+            else if (userChoice == 5)
+            {
+                petSleep(hunger, happiness, cleanliness, age, petName);
+            }
+            else if (userChoice == 6)
+            {
+                visitDoctor(hunger, happiness, cleanliness, age, money, petName);
+            }
+            else if (userChoice == 7) 
+            {
+                cout << "Goodbye...\n";
+                gameRunning = false;
+            }
+            else
+            {
+                cout << "Invalid input, please try again.\n";
+            }
+            
+            checkMaxStatus(hunger, happiness, cleanliness); 
+            checkPet(hunger, happiness, cleanliness, age, gameRunning, petName); 
+        }
+        while (gameRunning == true);
+
+        cout << "Do you want to start a new game? (Y/N): "<< endl;
+        cin >> again;      
+    }
+    while (again == 'y' || again == 'Y');
+
+    cout << "Bye! Thanks for playing!" << endl;
+
+    return 0;
+}
+
+
+// Function definitions
 double mood(int hunger, int happiness, int cleanliness)
 {
     return (hunger + happiness + cleanliness) / 3.0;
@@ -361,93 +452,3 @@ void visitDoctor(int& hunger, int& happiness, int& cleanliness, int& age, int& m
     cout << "======= continue =======\n";
 }
 
-
-int main()
-{ 
-    // https://www.youtube.com/watch?v=-NA_B_vJP14&t=105s
-    // give different random value. 
-    srand(time(0)); 
-
-    char again;
-    do
-    {
-        int age = INITIAL_PET_AGE;
-        // https://www.w3schools.com/cpp/cpp_howto_random_number.asp
-        
-        int happiness = rand() % 20 + 7; 
-        int hunger = rand() % 20 + 7; 
-        int cleanliness = rand() % 20 + 7; 
-        int money = INITIAL_MONEY;
-
-
-        string petName;
-        int userChoice;
-        bool gameRunning = true;
-        
-        cout << "Welcome to Virtual Pet 1.0. \n";
-        cout << "Please enter the name of your pet: \n";
-        cin >> petName;
-        
-        cout << "======= Game Start =======\n";
-        do
-        {
-            cout << petName << " is " << age << " years old.\n";
-            cout << "Money: $" << money << endl;
-            cout << "Here is what you can do with " << petName << ".\n";
-            cout << "1. Feed your pet.\n";
-            cout << "2. Play with your pet.\n";
-            cout << "3. Talk to your pet.\n";
-            cout << "4. Clean your pet.\n"; 
-            cout << "5. Let your pet sleep.\n";
-            cout << "6. Take your pet to the doctor. ($500)\n";
-            cout << "7. Quit the game.\n"; 
-            cin >> userChoice;
-
-            if (userChoice == 1)
-            {
-                feed(hunger, happiness, cleanliness, age, petName); 
-            }
-            else if (userChoice == 2)
-            {
-                play(hunger, happiness, cleanliness, age, petName); 
-            }
-            else if (userChoice == 3)
-            {
-                talk(hunger, happiness, cleanliness, age, petName); 
-            }
-            else if (userChoice == 4)
-            {
-                clean(hunger, happiness, cleanliness, age, petName); 
-            }
-            else if (userChoice == 5)
-            {
-                petSleep(hunger, happiness, cleanliness, age, petName);
-            }
-            else if (userChoice == 6)
-            {
-                visitDoctor(hunger, happiness, cleanliness, age, money, petName);
-            }
-            else if (userChoice == 7) 
-            {
-                cout << "Goodbye...\n";
-                gameRunning = false;
-            }
-            else
-            {
-                cout << "Invalid input, please try again.\n";
-            }
-            
-            checkMaxStatus(hunger, happiness, cleanliness); 
-            checkPet(hunger, happiness, cleanliness, age, gameRunning, petName); 
-        }
-        while (gameRunning == true);
-
-        cout << "Do you want to start a new game? (Y/N): "<< endl;
-        cin >> again;      
-    }
-    while (again == 'y' || again == 'Y');
-
-    cout << "Bye! Thanks for playing!" << endl;
-
-    return 0;
-}
